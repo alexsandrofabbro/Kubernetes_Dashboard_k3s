@@ -38,44 +38,39 @@
      <p>Esse comando criará todos os componentes necessários para o Dashboard, como os deployments, serviços e namespaces.</p>    
      <h3>2. Expondo o Kubernetes Dashboard</h3>    
      <p>Por padrão, o Dashboard não está acessível externamente por questões de segurança. Para acessá-lo fora do cluster, podemos expô-lo temporariamente via proxy ou configurar um serviço LoadBalancer.</p>
+<!--</ol><-->
+    <h3 id="expondo_via_proxy">Expondo via proxy:</h3>
+        <ol>
+            <p>Uma maneira rápida e fácil de acessar o Dashboard é utilizando o comando proxy do <code>kubectl</code>:</p>
+            <pre><code>kubectl proxy</code></pre>
+            <p>A partir disso, o Dashboard poderá ser acessado localmente através do URL: <a href="http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/" 
+            target="_blank">http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/</a></p> 
+        </ol>
+    <br>
+    <h3 id="expondo_via_loadBalancer">Expondo via LoadBalancer:</h3>
+        <ol>
+            <p>Caso prefira ter acesso externo ao Dashboard, configure um LoadBalancer. No caso do k3s, o MetalLB pode ser usado para fornecer IPs externos.</p>
+            <p>Crie um arquivo <code>service.yaml</code> com o seguinte conteúdo:</p>    
+           <pre><code>apiVersion: v1
+           kind: Service
+           metadata:
+             labels:
+               k8s-app: kubernetes-dashboard
+             name: kubernetes-dashboard-lb
+             namespace: kubernetes-dashboard
+           spec:
+             ports:
+               - port: 443
+                 targetPort: 8443
+             selector:
+               k8s-app: kubernetes-dashboard
+             type: LoadBalancer
+           </code></pre>    
+        <p>Aplique o serviço:</p>
+        <pre><code>kubectl apply -f service.yaml</code></pre>    
+        <p>Esse serviço agora estará acessível externamente no IP atribuído pelo LoadBalancer.</p>
+       </ol>
 </ol>
-
-
-<h2 id="expondo_via_proxy">Expondo via proxy:</h2>
-<ol>
-    <p>Uma maneira rápida e fácil de acessar o Dashboard é utilizando o comando proxy do <code>kubectl</code>:</p>
-    <pre><code>kubectl proxy</code></pre>
-    <p>A partir disso, o Dashboard poderá ser acessado localmente através do URL: <a href="http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/" 
-    target="_blank">http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/</a></p> 
-</ol>
-<br>
-
-<h2 id="expondo_via_loadBalancer">Expondo via LoadBalancer:</h2>
-<ol>
-    <p>Caso prefira ter acesso externo ao Dashboard, configure um LoadBalancer. No caso do k3s, o MetalLB pode ser usado para fornecer IPs externos.</p>
-    <p>Crie um arquivo <code>service.yaml</code> com o seguinte conteúdo:</p>
-
-   <pre><code>apiVersion: v1
-   kind: Service
-   metadata:
-     labels:
-       k8s-app: kubernetes-dashboard
-     name: kubernetes-dashboard-lb
-     namespace: kubernetes-dashboard
-   spec:
-     ports:
-       - port: 443
-         targetPort: 8443
-     selector:
-       k8s-app: kubernetes-dashboard
-     type: LoadBalancer
-   </code></pre>
-
-<p>Aplique o serviço:</p>
-
-<pre><code>kubectl apply -f service.yaml</code></pre>
-
-<p>Esse serviço agora estará acessível externamente no IP atribuído pelo LoadBalancer.</p>
 
 <h2>4. Autenticação no Kubernetes Dashboard</h2>
 
