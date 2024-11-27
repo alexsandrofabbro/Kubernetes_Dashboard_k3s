@@ -27,7 +27,7 @@
          cluster:</p>
      <pre><code>kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml</code></pre>
      <p>Esse comando criará todos os componentes necessários para o Dashboard, como os deployments, serviços e namespaces.</p>    
-    <h3>1.1 Comando para verificar se foi criado o DashBoard:</h3>
+    <h3>1.1 Comando para verificar se foi criado o DashBoard</h3>
     <pre><code>kubectl get pods -n kubernetes-dashboard</code></pre>
      <h3>2. Expondo o Kubernetes Dashboard</h3>    
      <p>Por padrão, o Dashboard não está acessível externamente por questões de segurança. Para acessá-lo fora do cluster, podemos expô-lo temporariamente via proxy ou configurar um serviço LoadBalancer.</p>
