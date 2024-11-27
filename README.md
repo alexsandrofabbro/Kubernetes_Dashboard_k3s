@@ -22,14 +22,14 @@
 
 <h2 id="instalação_kubernetes_dashboard"> Instalação do Kubernetes Dashboard</h2>
 <ol>
-     <h3>1. Baixando e aplicando o manifesto do Kubernetes Dashboard</h3>
+    <h3>1. Baixando e aplicando o manifesto do Kubernetes Dashboard</h3>
      <p>O Kubernetes Dashboard pode ser instalado através de um manifesto YAML oficial disponibilizado pela comunidade Kubernetes. Para instalá-lo, execute o seguinte comando no seu terminal, que baixará e aplicará o manifesto diretamente no 
          cluster:</p>
      <pre><code>kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml</code></pre>
      <p>Esse comando criará todos os componentes necessários para o Dashboard, como os deployments, serviços e namespaces.</p>    
     <h3>1.1 Comando para verificar se foi criado o DashBoard</h3>
-    <pre><code>kubectl get pods -n kubernetes-dashboard</code></pre>
-     <h3>2. Expondo o Kubernetes Dashboard</h3>    
+     <pre><code>kubectl get pods -n kubernetes-dashboard</code></pre>
+    <h3>2. Expondo o Kubernetes Dashboard</h3>    
      <p>Por padrão, o Dashboard não está acessível externamente por questões de segurança. Para acessá-lo fora do cluster, podemos expô-lo temporariamente via proxy ou configurar um serviço LoadBalancer.</p>
   <ol>
         <h3>2.1Expondo via proxy:</h3>
