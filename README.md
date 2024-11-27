@@ -38,6 +38,7 @@
                 <pre><code>kubectl proxy</code></pre>
                 <p>A partir disso, o Dashboard poderá ser acessado localmente através do URL: <a href="http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/" 
                 target="_blank">http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/</a></p> 
+                 <pre><code>http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy</code></pre>
             </ol>
         <br>
         <h3>2.2 Expondo via LoadBalancer:</h3>
